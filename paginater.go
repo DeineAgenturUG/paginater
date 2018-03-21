@@ -17,14 +17,14 @@ package paginater
 
 // Paginater represents a set of results of pagination calculations.
 type Paginater struct {
-	total     int
-	pagingNum int
-	current   int
-	numPages  int
+	total     int64
+	pagingNum int64
+	current   int64
+	numPages  int64
 }
 
 // New initialize a new pagination calculation and returns a Paginater as result.
-func New(total, pagingNum, current, numPages int) *Paginater {
+func New(total, pagingNum, current, numPages int64) *Paginater {
 	if pagingNum <= 0 {
 		pagingNum = 1
 	}
@@ -48,7 +48,7 @@ func (p *Paginater) HasPrevious() bool {
 	return p.current > 1
 }
 
-func (p *Paginater) Previous() int {
+func (p *Paginater) Previous() int64 {
 	if !p.HasPrevious() {
 		return p.current
 	}
@@ -60,7 +60,7 @@ func (p *Paginater) HasNext() bool {
 	return p.total > p.current*p.pagingNum
 }
 
-func (p *Paginater) Next() int {
+func (p *Paginater) Next() int64 {
 	if !p.HasNext() {
 		return p.current
 	}
@@ -76,12 +76,12 @@ func (p *Paginater) IsLast() bool {
 }
 
 // Total returns number of total rows.
-func (p *Paginater) Total() int {
+func (p *Paginater) Total() int64 {
 	return p.total
 }
 
 // TotalPage returns number of total pages.
-func (p *Paginater) TotalPages() int {
+func (p *Paginater) TotalPages() int64 {
 	if p.total == 0 {
 		return 1
 	}
@@ -92,22 +92,22 @@ func (p *Paginater) TotalPages() int {
 }
 
 // Current returns current page number.
-func (p *Paginater) Current() int {
+func (p *Paginater) Current() int64 {
 	return p.current
 }
 
 // PagingNum returns number of page size.
-func (p *Paginater) PagingNum() int {
+func (p *Paginater) PagingNum() int64 {
 	return p.pagingNum
 }
 
 // Page presents a page in the paginater.
 type Page struct {
-	num       int
+	num       int64
 	isCurrent bool
 }
 
-func (p *Page) Num() int {
+func (p *Page) Num() int64 {
 	return p.num
 }
 
@@ -115,7 +115,7 @@ func (p *Page) IsCurrent() bool {
 	return p.isCurrent
 }
 
-func getMiddleIdx(numPages int) int {
+func getMiddleIdx(numPages int64) int64 {
 	if numPages%2 == 0 {
 		return numPages / 2
 	}
