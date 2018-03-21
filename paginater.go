@@ -136,14 +136,14 @@ func (p *Paginater) Pages() []*Page {
 	if p.TotalPages() <= p.numPages {
 		pages := make([]*Page, p.TotalPages())
 		for i := range pages {
-			pages[i] = &Page{i + 1, i+1 == p.current}
+			pages[i] = &Page{int64(i + 1), int64(i+1) == p.current}
 		}
 		return pages
 	}
 
 	numPages := p.numPages
 	maxIdx := numPages - 1
-	offsetIdx := 0
+	offsetIdx := int64(0)
 	hasMoreNext := false
 
 	// Check more previous and next pages.
