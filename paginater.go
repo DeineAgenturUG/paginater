@@ -183,14 +183,14 @@ func (p *Paginater) Pages() []*Page {
 
 	// Check previous pages.
 	for i := 0; i < previousNum; i++ {
-		pages[offsetIdx+i] = &Page{i + offsetVal, false}
+		pages[int64(offsetIdx+i)] = &Page{int64(i + offsetVal), false}
 	}
 
 	pages[offsetIdx+previousNum] = &Page{p.current, true}
 
 	// Check next pages.
 	for i := 1; i <= nextNum; i++ {
-		pages[offsetIdx+previousNum+i] = &Page{p.current + i, false}
+		pages[int64(offsetIdx+previousNum+i)] = &Page{int64(p.current + i), false}
 	}
 
 	return pages
